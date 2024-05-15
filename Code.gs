@@ -21,6 +21,16 @@ const persons = [
     },
 ];
 
+function sendMail(recipientEmail, subject, body) {
+    try {
+        GmailApp.sendEmail(recipientEmail, subject, body);
+        console.log(`Email send to ${subject}`);
+    } catch (error) {
+        console.error("Failed to send email:", error);
+    }
+
+}
+
 function autoUpdateToManager(body) {
     const recipientEmail = persons.find(
         (person) => person.role === "Manager"
@@ -57,7 +67,6 @@ function notifyQA() {
     } else {
         console.warning("QA's email not found.");
     }
-
 }
 
 function notifyDeveloper(name, message) {
@@ -70,16 +79,6 @@ function notifyDeveloper(name, message) {
     } else {
         console.warning("Developer's email not found.");
     }
-}
-
-function sendMail(recipientEmail, subject, body) {
-    try {
-        GmailApp.sendEmail(recipientEmail, subject, body);
-        console.log(`Email send to ${subject}`);
-    } catch (error) {
-        console.error("Failed to send email:", error);
-    }
-
 }
 
 function onEdit(e) {
